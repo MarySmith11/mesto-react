@@ -26,7 +26,7 @@ function App() {
     setImagePopupOpen(true);
   }
   return (
-    <div class="page">
+    <>
       <Header />
       <Main onEditProfile={() => { setEditProfileClick(true) }} onAddPlace={() => { setAddPlaceClick(true) }} onEditAvatar={() => { setEditAvatarClick(true) }} onImagePopupOpen={handleCardClick} />
       <Footer />
@@ -94,7 +94,7 @@ function App() {
       />
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen}/>
-    </div>
+    </>
   );
 }
 
