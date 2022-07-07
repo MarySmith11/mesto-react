@@ -3,7 +3,7 @@ function PopupWithForm(props) {
         <div className={`popup popup_type_${props.name} ${props.isOpen ? 'popup_opened' : ''}`}>
             <div className="popup__container">
                 <h2 className="popup__title">{props.title}</h2>
-                <form action="#" className="form" name={`${props.name}-profile`} novalidate>
+                <form action="#" className="form" name={`${props.name}-profile`}>
                     {props.children}
                     <button type="submit" className='form__button' disabled={props.buttonDisabled}>{props.buttonOnText}</button>
                 </form>

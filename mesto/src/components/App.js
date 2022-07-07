@@ -6,29 +6,29 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 function App() {
-  const [isEditProfilePopupOpen, setEditProfileClick] = React.useState(false);
-  const [isAddPlacePopupOpen, setAddPlaceClick] = React.useState(false);
-  const [isEditAvatarPopupOpen, setEditAvatarClick] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfileClick] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlaceClick] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarClick] = React.useState(false);
 
-  const [selectedCard, setSelectedCard] = React.useState([]);
-  const [isImagePopupOpen, setImagePopupOpen] = React.useState(false); 
+  const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false); 
 
   const closeAllPopups = () => {
-    setEditProfileClick(false); 
-    setAddPlaceClick(false); 
-    setEditAvatarClick(false);
-    setImagePopupOpen(false);
-    setSelectedCard([]);
+    setIsEditProfileClick(false); 
+    setIsAddPlaceClick(false); 
+    setIsEditAvatarClick(false);
+    setIsImagePopupOpen(false);
+    setSelectedCard({name: '', link: ''});
   }
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
-    setImagePopupOpen(true);
+    setIsImagePopupOpen(true);
   }
   return (
     <>
       <Header />
-      <Main onEditProfile={() => { setEditProfileClick(true) }} onAddPlace={() => { setAddPlaceClick(true) }} onEditAvatar={() => { setEditAvatarClick(true) }} onImagePopupOpen={handleCardClick} />
+      <Main onEditProfile={() => { setIsEditProfileClick(true) }} onAddPlace={() => { setIsAddPlaceClick(true) }} onEditAvatar={() => { setIsEditAvatarClick(true) }} onImagePopupOpen={handleCardClick} />
       <Footer />
       <PopupWithForm
         title="Редактировать профиль"
@@ -38,15 +38,15 @@ function App() {
         onClose={closeAllPopups}
         isOpen={isEditProfilePopupOpen}
         >
-        <div class="form__text-wrap">
-          <input required type="text" name="name" class="form__text form__text_type_name" placeholder="Имя"
-          id="name-input" minlength="2" maxlength="40" />
-          <span class="form__error name-input-error"></span>
+        <div className="form__text-wrap">
+          <input required type="text" name="name" className="form__text form__text_type_name" placeholder="Имя"
+          id="name-input" minLength="2" maxLength="40" />
+          <span className="form__error name-input-error"></span>
         </div>
-        <div class="form__text-wrap">
-          <input required type="text" name="profession" class="form__text form__text_type_info" placeholder="О себе"
-          id="profession-input" minlength="2" maxlength="200" />
-          <span class="form__error profession-input-error"></span>
+        <div className="form__text-wrap">
+          <input required type="text" name="profession" className="form__text form__text_type_info" placeholder="О себе"
+          id="profession-input" minLength="2" maxLength="200" />
+          <span className="form__error profession-input-error"></span>
         </div>
       </PopupWithForm>
 
@@ -58,15 +58,15 @@ function App() {
         onClose={closeAllPopups}
         isOpen={isAddPlacePopupOpen}
         >
-          <div class="form__text-wrap">
-          <input required type="text" name="name" class="form__text form__text_type_title-name" placeholder="Название"
-          id="place-title-input" minlength="2" maxlength="30" />
-          <span class="form__error place-title-input-error"></span>
+          <div className="form__text-wrap">
+          <input required type="text" name="name" className="form__text form__text_type_title-name" placeholder="Название"
+          id="place-title-input" minLength="2" maxLength="30" />
+          <span className="form__error place-title-input-error"></span>
         </div>
-        <div class="form__text-wrap">
-          <input required type="url" name="link" class="form__text form__text_type_link"
+        <div className="form__text-wrap">
+          <input required type="url" name="link" className="form__text form__text_type_link"
           placeholder="Ссылка на картинку" id="link-input" />
-          <span class="form__error link-input-error"></span>
+          <span className="form__error link-input-error"></span>
         </div>
       </PopupWithForm>
 
@@ -78,10 +78,10 @@ function App() {
         onClose={closeAllPopups}
         isOpen={isEditAvatarPopupOpen}
         >
-        <div class="form__text-wrap">
-          <input required type="url" name="avatar" class="form__text form__text_type_avatar"
+        <div className="form__text-wrap">
+          <input required type="url" name="avatar" className="form__text form__text_type_avatar"
           placeholder="Ссылка на картинку" id="avatar-input" />
-          <span class="form__error avatar-input-error"></span>
+          <span className="form__error avatar-input-error"></span>
         </div>
       </PopupWithForm>
 

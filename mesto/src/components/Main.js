@@ -41,8 +41,8 @@ function Main(props) {
             </section>
 
             <section className="cards">
-                {cards.map((card, i) => (
-                    <Card key={i} card={card} onCardClick={props.onImagePopupOpen} />
+                {cards.map((card) => (
+                    <Card key={card._id} card={card} onCardClick={props.onImagePopupOpen} />
                 ))}
             </section>
         </main>
