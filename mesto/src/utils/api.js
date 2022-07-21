@@ -64,7 +64,7 @@ class Api {
                 })
             }
         )
-            .then((res) => this._getResponse(res, 'Произошла ошибка при добавлении новой карточк'));
+            .then((res) => this._getResponse(res, 'Произошла ошибка при добавлении новой карточки'));
     }
 
     removeCard(cardId) {

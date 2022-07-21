@@ -11,6 +11,10 @@
     transition: opacity .3s ease-in-out;
 }
 
+.cards__basket-button_hidden {
+    display: none;
+}
+
 .cards__basket-button:hover {
     opacity: 0.5;
 }
