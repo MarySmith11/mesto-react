@@ -43,12 +43,12 @@ function EditProfilePopup(props) {
             isOpen={props.isOpen}
         >
             <div className="form__text-wrap">
-                <input required type="text" value={userName} name="name" className="form__text form__text_type_name" placeholder="Имя"
+                <input required type="text" value={userName || ""} name="name" className="form__text form__text_type_name" placeholder="Имя"
                     id="name-input" minLength="2" maxLength="40" onChange={handleUserNameChange} />
                 <span className="form__error name-input-error"></span>
             </div>
             <div className="form__text-wrap">
-                <input required type="text" value={userDescription} name="profession" className="form__text form__text_type_info" placeholder="О себе"
+                <input required type="text" value={userDescription || ""} name="profession" className="form__text form__text_type_info" placeholder="О себе"
                     id="profession-input" minLength="2" maxLength="200" onChange={handleUserDescriptionChange} />
                 <span className="form__error profession-input-error"></span>
             </div>
