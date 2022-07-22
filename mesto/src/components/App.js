@@ -11,9 +11,9 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import AddPlacePopup from './AddPlacePopup';
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfileClick] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlaceClick] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarClick] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
   const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '' });
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
@@ -23,13 +23,15 @@ function App() {
   React.useEffect(() => {
     apiInstance.getUserInfo().then((res) => {
       setCurrentUser(res);
-    })
+    }).catch((err) => {
+      console.log(err);
+    });
   }, []);
 
   const closeAllPopups = () => {
-    setIsEditProfileClick(false);
-    setIsAddPlaceClick(false);
-    setIsEditAvatarClick(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
     setIsImagePopupOpen(false);
     setSelectedCard({ name: '', link: '' });
   }
@@ -82,10 +84,11 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    apiInstance.removeCard(card._id).then((newCard) => {
-      const newCards = cards.filter((c) => c._id !== card._id);
-      setCards(newCards);
-    })
+    apiInstance.removeCard(card._id).then(() => {
+      setCards((state) => state.filter((c) => c._id !== card._id));
+    }).catch((err) => { 
+      console.log(err); 
+    }); 
   }
 
   function handleAddPlaceSubmit(newCard) {
@@ -102,11 +105,11 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header />
-      <Main cards={cards} onEditProfile={() => { setIsEditProfileClick(true) }} onAddPlace={() => { setIsAddPlaceClick(true) }} onEditAvatar={() => { setIsEditAvatarClick(true) }} onImagePopupOpen={handleCardClick} onCardDelete={handleCardDelete} onCardLike={handleCardLike} />
+      <Main cards={cards} onEditProfile={() => { setIsEditProfilePopupOpen(true) }} onAddPlace={() => { setIsAddPlacePopupOpen(true) }} onEditAvatar={() => { setIsEditAvatarPopupOpen(true) }} onImagePopupOpen={handleCardClick} onCardDelete={handleCardDelete} onCardLike={handleCardLike} />
       <Footer />
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
       <PopupWithForm
         title="Вы уверены?"
         name="confirm"
